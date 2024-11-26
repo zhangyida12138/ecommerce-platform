@@ -14,6 +14,8 @@ pages/：页面级组件（如 HomePage.jsx、ProductPage.jsx）。
 hooks/：自定义 React Hooks（如 useAuth、useFetch）。
 styles/：全局和局部 SASS 文件，建议按照模块划分文件。
 utils/：前端工具函数（如 API 请求封装 api.js、数据格式化 format.js）。
+store/:全局状态管理。
+router/：全局路由管理。
 App.jsx：React 应用的根组件。
 index.js：React 渲染入口，挂载到 DOM。
 
