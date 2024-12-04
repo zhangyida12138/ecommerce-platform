@@ -5,3 +5,10 @@ const router = createBrowserRouter([
         
     }
 ])
+/**
+ * 
+ * @param {Number} min 
+ */
+function test(min){
+
+}

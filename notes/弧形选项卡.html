@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A blank HTML template">
+    <meta name="author" content="Your Name">
+    <title>Blank HTML Template</title>
+    <!-- Add your stylesheets here -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .tab{
+            width: 100px;
+            height: 40px;
+            background-color: red;
+            margin: 0 auto;
+            border-radius: 10px 10px 0 0 ;
+            position: relative;
+            transform:perspective(30px) rotateX(21deg);
+            transform-origin: center bottom;
+        }
+        .tab::before, .tab::after{
+            content:'';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            bottom: 0;
+        }
+        .tab::before{
+            left:-10px;
+            background: radial-gradient(circle at 0 0, transparent 10px,red 10px );
+
+        }
+        .tab::after{
+            right:-10px;
+            background: radial-gradient(circle at 100% 0,transparent 10px, red 10px);
+        }
+        .tab div {
+            transform: perspective(30px) rotateX(-21deg); /* 抵消父元素的倾斜 */
+            transform-origin: center bottom;
+            font-size: 14px;
+            color: white;
+        }
+    </style>
+<body>
+    <div class="tab">
+        <div >选项卡</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

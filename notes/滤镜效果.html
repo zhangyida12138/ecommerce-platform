@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A blank HTML template">
+    <meta name="author" content="Your Name">
+    <title>Blank HTML Template</title>
+    <!-- Add your stylesheets here -->
+    <style>
+        .avatar{
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            width: 300px;
+            /* box-shadow: 10px 10px 10px rgba(0,0,0,0.5); */
+            /* filter:blur(10px)模糊半径 contrast(3)对比度 grayscale(0)灰度 hue-rotate(45deg)色环偏移 */
+            /* backdrop-filter不动元素本身，动元素后面的颜色: blur(10px)模糊半径 contrast(3)对比度 grayscale(0)灰度 hue-rotate(45deg)色环偏移; */
+        }
+        body{
+            background: #000;
+            color: #fff;
+
+        }
+        html{
+            filter:contrast(26);
+            /* 不要单位! 在实际开发 中给父元素加上，可以实现相融的效果*/
+        }
+        h1{
+            font-size: 10em;
+            transition: 0.5s;
+            margin: 0;
+            filter: blur(10px);
+        }
+        h1:hover{
+            filter: blur(0);
+        }
+    </style>
+</head>
+<body>
+<h1>666</h1>
+    <img class="avatar" src="./登山者右.png " alr=""/>
+    <script >
+//一些像素点通过一些算法，变成另一种像素点
+
+
+//box-shadow盒子阴影box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+//offset-x（水平偏移量，必需）：
+
+// 定义阴影在水平方向的偏移量。
+// 正值表示阴影向右移动，负值表示向左移动。
+// offset-y（垂直偏移量，必需）：
+
+// 定义阴影在垂直方向的偏移量。
+// 正值表示阴影向下移动，负值表示向上移动。
+// blur-radius（模糊半径，可选）：
+
+// 定义阴影的模糊程度。
+// 值越大，阴影越模糊且范围越大；如果为 0，阴影没有模糊效果（边缘清晰）。
+// 默认为 0。
+// spread-radius（扩展半径，可选）：
+
+// 定义阴影的扩展或收缩。
+// 正值使阴影变大，负值使阴影缩小。
+// 默认为 0。
+// color（颜色，可选）：
+
+// 定义阴影的颜色。
+// 可以使用任何有效的 CSS 颜色值（如 red、rgba(0,0,0,0.5) 等）。
+// 如果未指定颜色，浏览器通常会使用默认颜色（通常是黑色）。
+// inset（内阴影，可选）：
+
+// 如果添加 inset，阴影会变成内阴影（向内投射到元素内部）。
+// 默认情况下，阴影是外阴影（向外投射）。
+        
+    </script>
+</body>
+</html>

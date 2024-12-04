@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Demo</title>
+</head>
+
+<body>
+    <!-- 定义一个 canvas 元素 -->
+    <canvas id="myCanvas" width="400" height="300" style="border:1px solid #000;"></canvas>
+    <svg width="100" height="100" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+    </svg>
+    <script>
+        // 获取 canvas 元素
+        const canvas = document.getElementById('myCanvas');
+
+        // 获取绘图上下文 (2D)
+        const ctx = canvas.getContext('2d');
+
+        // 设置填充颜色为红色
+        ctx.fillStyle = 'red';
+
+        // 绘制一个矩形，参数：x, y, 宽度, 高度
+        ctx.fillRect(50, 50, 150, 100);
+
+    </script>
+</body>
+
+</html>
