@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+        .alert {
+            display: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="my-p"></p>
+    <div class="alert " role="alert">
+        提示框
+    </div>
+    <button class="btn">登陆</button>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 请求报文的组成部分：
+请求行：请求方法，url，协议
+请求头
+空行
+请求体 -->
+    <!-- 响应报文的组成部分：
+响应行，状态行：协议，响应状态码，状态信息
+响应头
+空行
+响应体 返回的资源-->
+    <script>
+        const myAlert = document.querySelector('.alert')
+        //1.显示提示框
+        //2.不同提升文字msg，和不同提示颜色isSuccess(true or false)
+        //3，两秒后消失
+        function alertFn(msg, isSuccess) {
+            myAlert.classList.add('show');
+
+            myAlert.innerText = msg;
+
+            const bgStyle = isSuccess ? 'alert-success' : 'alert-danger';
+            myAlert.classList.add(bgStyle);
+
+            setTimeout(() => {
+                myAlert.classList.remove('show');
+                myAlert.classList.remove(bgStyle);
+            }, 2000)
+        }
+
+        document.querySelector('.btn').addEventListener('click', () => {
+            // 获取用户名和密码
+            let username = 'zhangyida'
+            let password = '123456'
+            // 判断长度
+            if (username.length < 8) {
+                alertFn('用户名长度必须大于等于8', false)
+                console.log('用户名长度必须大于等于8');
+                return
+            }
+            if (password.length < 6) {
+                alertFn('密码长度必须大于等于6', false)
+                console.log('密码长度必须大于等于6');
+                return
+            }
+            axios({
+                url: 'https://hmajax.itheima.net/api/login',
+                method: 'post',//不区分大小写，默认是get，可以省略
+                data: {
+                    username,
+                    password//简写
+                }
+                //get需要用到params，post用到data
+            }).then(result => {
+                console.log(result);
+                console.log(result.data);
+                alertFn('登录成功', true)
+            }).catch(error => {
+                console.log(error.response.data.message);
+                alert(error.response.data.message)
+            });
+        })
+
+    </script>
+</body>
+
+</html>

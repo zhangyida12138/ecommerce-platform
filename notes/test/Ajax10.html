@@ -1,0 +1,85 @@
+<!-- bootstrap可以不离开当前页面，显示单独内容，供用户使用 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 1.引入css库和js
+     准备弹窗标签，确认结构
+     通过自定义属性，控制弹窗的显示和隐藏 -->
+     <div class="list"></div>
+    <button type="button" class="btn btn-primary edit-btn" data-bs-toggle="modal" >
+        <!-- data-bs-toggle是为了说明要打开的是弹窗
+            data-bs-target是为了指明是哪一个弹窗 -->
+        显示弹窗
+    </button>
+    <!-- The Modal -->
+    <div class="modal my-box" id="myModal">
+        <!-- 为了区分多个弹窗，给弹窗取名my-box，在上面的按钮中可以选中 -->
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">请输入姓名</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <span>姓名: </span>
+                    <input type="text" class="username"></input>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <!-- data-bs-dismiss="modal"关闭弹窗 -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary save-btn" >Save</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./form-serialize.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./Ajax10.js"></script>
+    <script>
+            const modalDom = document.querySelector('.my-box');
+            const modal = new bootstrap.Modal(modalDom);
+
+            document.querySelector('.edit-btn').addEventListener('click',()=>{
+                document.querySelector('.username').value='默认名字'
+                modal.show();
+            });
+            document.querySelector('.save-btn').addEventListener('click',()=>{
+                const username=document.querySelector('.username').value;
+                console.log(username);
+                
+                modal.hide();//使用hide和show控制显示和隐藏
+            });
+// 如果直接打开和关闭，不需要额外逻辑：
+// data-bs-toggle是为了说明要打开的是弹窗
+// data-bs-target是为了指明是哪一个弹窗
+// data-bs-dismiss="modal"关闭弹窗
+// 如果需要额外逻辑操作：
+// const modalDom = document.querySelector('.my-box');找到元素
+// const modal = new bootstrap.Modal(modalDom);创建bootstrap对象
+// modal.show();
+// modal.hide();
+
+    </script>
+</body>
+
+</html>

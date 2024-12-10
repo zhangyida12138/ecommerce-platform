@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <form>
+        <span>省份：</span>
+        <select>
+            <option class="province">
+
+            </option>
+        </select>
+        <span>城市：</span>
+        <select>
+            <option class="city">
+
+            </option>
+        </select>
+        <span>地区：</span>
+        <select>
+            <option class="area">
+
+            </option>
+        </select>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        //promise链式调用
+        //new Promise()->.then(回调函数)->return生成新的promise对象
+        const p =new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve('北京市');
+            },2000)
+        })
+        const p2= p.then(result=>{
+            console.log(result); 
+            //创建新的promise对象-模拟请求城市名字
+            //return Promise对象最终状态和结果，影响到新的Promise对象
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve(result+'---北京')
+                },2000)
+            })           
+        })
+        const p3=p2.then(result=>{
+            console.log(result);
+            
+        })
+        console.log(p);
+        console.log(p2);
+        console.log(p3==p2);//说明生成的Promise对象是新的
+        
+    </script>
+</body>
+
+</html>

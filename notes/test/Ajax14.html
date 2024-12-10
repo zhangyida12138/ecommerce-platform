@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <p class="my-p"></p>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const pname = "北京";
+        const cname = "北京市";
+        const qObj = {
+            pname,
+            cname
+        }
+        // 查询参数的对象->查询参数的字符串
+        const paramObj = new URLSearchParams(qObj);
+        const queryString = paramObj.toString();
+        console.log(queryString);
+
+        const xhr= new XMLHttpRequest();
+        xhr.open('GET',`http://hmajax.itheima.net/api/area?${queryString}`)
+        xhr.addEventListener('loadend',()=>{
+            console.log(xhr.response);
+            
+        })
+        xhr.send();
+
+    </script>
+</body>
+
+</html>

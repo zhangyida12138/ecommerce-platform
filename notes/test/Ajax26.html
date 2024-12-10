@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <form>
+        <span>省份：</span>
+        <select class="province">
+        </select>
+        <span>城市：</span>
+        <select class="city">
+        </select>
+        <span>地区：</span>
+        <select class="area">
+        </select>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        //1.设置省份下拉菜单数据
+        axios({
+            url: 'http://hmajax.itheima.net/api/province'
+        }).then(result => {
+            console.log(result);
+            const optionStr = result.data.list.map(pname => `<option value="${pname}">${pname}</option>`).join(' ');
+            console.log(optionStr);
+            document.querySelector('.province').innerHTML = `<option value="">省份</option>` + optionStr;
+        })
+        //2.切换省份，设置城市下来菜单数据，清空地区下拉菜单
+        document.querySelector('.province').addEventListener('change', async e => {
+            console.log(e.target.value);
+            //本来需要在.then中才可以接受返回值，调用async，await，可以使用变量接收返回值
+            const result = await axios({ url: 'http://hmajax.itheima.net/api/city', params: { pname: e.target.value } });
+            console.log(result);
+            const optionStr = result.data.list.map(cname => `<option value="${cname}">${cname}</option>`).join(' ');
+            console.log(optionStr);
+            document.querySelector('.city').innerHTML = `<option value="">城市</option>` + optionStr;
+
+            //清空地区数据,因为切换省份原本只会修改城市列表，不修改地区
+            document.querySelector('.area').innerHTML=`<option value="">地区</option>`
+        })
+        document.querySelector('.city').addEventListener('change', async e => {
+            console.log(e.target.value);
+            //本来需要在.then中才可以接受返回值，调用async，await，可以使用变量接收返回值
+
+            const result = await axios({ url: 'http://hmajax.itheima.net/api/area', params: { pname:document.querySelector('.province').value,cname: e.target.value } });
+            console.log(result);
+            const optionStr = result.data.list.map(areaname => `<option value="${areaname}">${areaname}</option>`).join(' ');
+            console.log(optionStr);
+            document.querySelector('.area').innerHTML = `<option value="">城市</option>` + optionStr;
+
+        })
+
+    </script>
+</body>
+
+</html>

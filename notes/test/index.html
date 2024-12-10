@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>测试页面</title>
+    <style>
+        .dad{
+            width: 400px;
+            height: 600px;
+            background-color: red;
+        }
+        .son{
+            width: 200px;
+            height: 300px;
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <div class="dad">
+        <div class="son" >
+
+        </div>
+    </div>
+    <ul>
+        <li data-id="1">第1个孩子</li>
+        <!--自定义属性必须以data-开头，并且使用element.dataset.id这样访问
+        使用removeAttribute这样移除 -->
+        <li>第2个孩子</li>
+        <li>第3个孩子</li>
+        <li>第4个孩子</li>
+        <li>第5个孩子</li>
+        <p>不变色</p>
+    </ul>
+    <div class="box" style="width: 400px;height: 300px; border: 1px solid black;">1</div>
+    <button>点击就送</button>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <script>
+        const ul=document.querySelector('ul');
+        ul.addEventListener('click',function(e){
+            // alert(11)
+            console.dir(e.target);
+            if(e.target.tagName==='LI')
+                e.target.style.color='red'
+            // e.preventDefault();//阻止默认行为
+        })
+
+        item=document.querySelectorAll('li');
+        // document.querySelector('.tab-content .active').classList.remove('active')
+        // item[i].classList.add('active');增加属性和删除属性。
+
+
+        // 调试
+        // console.time('My Timer');
+        // for (let i = 0; i < 1000000; i++) { /* do something */ }
+        // console.timeEnd('My Timer');
+
+        // console.assert(1 === 2, 'Assertion failed: 1 is not equal to 2');
+
+        // const people = [
+        // { name: 'Alice', age: 25 },
+        // { name: 'Bob', age: 30 }
+        // ];
+        // console.table(people);
+
+        // console.info('This is some information');
+        // console.warn('This is a warning message');
+        // console.error('This is an error message');
+
+        // console.count('Count Label');
+        // console.count('Count Label');
+        // console.countReset('Count Label');
+        // console.count('Count Label');
+    </script>
+    <script >
+        // function count(){
+        //     let i=0;
+        // return function (){
+        //     i++;
+        //     console.log(`函数被使用了${i}次`);
+        // }
+        // }
+        // const fun= count()
+        // console.log(num+'件')
+        // var num=10;
+        // console.log(num+'件')
+        // test()
+        // function test(){
+        //     console.log('test')
+        // }
+        const dad=document.querySelector('.dad');
+        const son=document.querySelector('.son');
+        dad.addEventListener('mouseenter',function(){
+            console.log('鼠标经过');
+            
+        })
+        dad.addEventListener('mouseleave',function(){
+            console.log('鼠标离开');
+            
+        })
+        // 不推荐用mouseover 和mouseout
+
+        // 传统on注册事件l0
+        // 同一个对象，同名事件，后注册的会覆盖前面的
+        // 使用null覆盖可以解绑
+        // 都是在冒泡阶段执行
+
+        // 事件建通注册l2
+        // 语法使用addEventListener(事件类型，事件出来函数，是否使用捕获)
+        // 后注册的事不会覆盖前面的事件（同名）
+        // 必须使用removeEventListener解绑
+        // 匿名函数无法解绑
+    </script>
+</body>
+</html>

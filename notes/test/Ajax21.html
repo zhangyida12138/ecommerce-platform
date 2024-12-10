@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <form>
+        <span>省份：</span>
+        <select>
+            <option class="province">
+
+            </option>
+        </select>
+        <span>城市：</span>
+        <select>
+            <option class="city">
+
+            </option>
+        </select>
+        <span>地区：</span>
+        <select>
+            <option class="area">
+
+            </option>
+        </select>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        //promise链式调用
+        //new Promise()->.then(回调函数)->return生成新的promise对象
+        //在后面链式调用中 访问不兄弟节点的pname，所以要设定一个全局变量
+        let pname=''
+        //1.获取省份的Promise对象
+        axios({url:'http://hmajax.itheima.net/api/province'}).then(result =>{
+            console.log(result);
+             pname=result.data.list[0];
+            document.querySelector('.province').innerHTML=pname;
+            //2.获取城市的promise对象
+            return axios({url:'http://hmajax.itheima.net/api/city',params:{pname}})
+        }).then(result=>{//在这里调用.then不是在return中调用
+            console.log(result);
+            const cname=result.data.list[0];
+            document.querySelector('.city').innerHTML=cname;
+            //3.获取地区的promise对象
+            //访问不兄弟节点的pname，所以要设定一个全局变量
+            return axios({url:'http://hmajax.itheima.net/api/area',params:{pname,cname}})
+        }).then(result=>{
+            console.log(result);
+            const areaname=result.data.list[0];
+            document.querySelector('.area').innerHTML=areaname;
+        })
+        
+    </script>
+</body>
+
+</html>

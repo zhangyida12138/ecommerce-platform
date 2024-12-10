@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <form action="javascript:;" class="example-form">
+<!-- 通常情况下，action 会包含一个URL或服务器端脚本，表单的数据将会被提交到该地址。
+但是，设置 action="javascript:;" 意思是当用户提交表单时，不会有任何页面跳转或者提交操作。
+建议使用ajax，在js中处理数据
+
+javascript:; 本身是一个空操作，意味着不会触发任何与服务器相关的表单提交行为。
+通常用在希望通过JavaScript来手动处理表单数据的场景。 -->
+
+        <input type="text" name="uname">
+        <br>
+        <input type="text" name="pwd">
+        <br>
+        <input type="text" name="address">
+        <br>
+        <!-- name会作为获取数据结构的key -->
+        <input type="button" class="btn" value="提交">
+        <br>
+
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./form-serialize.js"></script>
+    <script>
+        // 使用form-serialize插件快速收集表单元素，先引入`
+        //表单元素要设置name属性，值会作为对象的属性名，最好和接口文档中一致
+        document.querySelector('.btn').addEventListener("click",()=>{
+            const form= document.querySelector('.example-form');//适合表单元素多的情况
+
+            const data = serialize(form,{hash:true,empty:false})//表单元素，和格式对象
+            //hash设置获取数据结构
+            // true:js对象，推荐使用，在请求体中提交给服务器
+            // flase：查询字符串 例如：uname=1&pwd=2&address=3
+            //empty设置是否获取空值
+            // true：获取空值
+            // false：不获取空值
+            console.log(data);
+            
+        })
+    </script>
+</body>
+</html>

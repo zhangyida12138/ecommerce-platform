@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <p class="my-p"></p>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Ajax原理就是XHR对象
+        // XHR对象可以有更多与服务器数据通信方式，了解axios内部原理
+
+        //1.创建XMLHttpRequest 对象
+        const xhr = new XMLHttpRequest();
+        //2.配置请求方法和请求url地址
+        xhr.open('GET', 'http://hmajax.itheima.net/api/province')
+        //3.监听loadend事件，接受响应结果
+        // readystatechange: 请求状态变化时触发，需要结合 readyState 和 status 判断。
+        // load: 请求成功完成时触发，不需要手动检查状态。
+        // error: 请求由于网络问题等失败时触发。
+        // abort: 请求被手动中止时触发。
+        // loadstart: 请求开始时触发。
+        // loadend: 请求结束时（无论成功或失败）触发。
+        // progress: 数据接收过程中触发，适合用来显示下载进度。
+        xhr.addEventListener('loadend', () => {
+            console.log(xhr.response);//这里返回的是json字符串，axios会自动转换成对象
+            const data = JSON.parse(xhr.response);
+            console.log(data.list.join('<br>'));
+            document.querySelector('.my-p').innerHTML = data.list.join('<br>');
+
+        })
+        //4.调用send（）方法发起请求
+        xhr.send();
+    </script>
+</body>
+
+</html>

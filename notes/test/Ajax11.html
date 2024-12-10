@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <input type="file" class="upload">
+    <img src="" alt="" class="my-img">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.querySelector('.upload').addEventListener('change',e=>{
+            console.log(e.target.files[0]);
+            // 请求体的参数一般为multipart/form-data
+            // 使用Formdata携带图片文件
+            // Formdata也可以携带其他类型的文件
+            const df=new FormData();
+            df.append('img',e.target.files[0])
+            axios({
+                url:'http://hmajax.itheima.net/api/uploadimg',
+                method:'post',
+                data:df
+            }).then(result=>{
+                console.log(result);
+                // 取出图片的url网址
+                const imgUrl=result.data.data.url;
+                // document.querySelector('.my-img').src=imgUrl
+                //获取url，并设置为壁纸
+                document.body.style.backgroundImage=`url(${imgUrl})`
+
+                localStorage.setItem('bgImg',imgUrl)
+            })
+        })
+            set
+        const bgUrl=localStorage.getItem('bgImg')
+        bgUrl && (document.body.style.backgroundImage=`url(${bgUrl})`)
+        // 本地有背景图地址才设置
+    </script>
+</body>
+</html>

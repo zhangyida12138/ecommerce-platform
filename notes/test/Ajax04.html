@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <p class="my-p"></p>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // document.querySelector('btn').addEventListener('click',()=>{
+        //     let pName=document.querySelector('.province').value;
+        //     let cname=document.querySelector('.city').value;
+            
+        // })
+        pName='辽宁省';
+        cName='大连市';
+
+        axios({
+            url:'https://hmajax.itheima.net/api/area',
+            params:{
+                pname:pName,
+                cname:cName
+                // 前面的pname和cname是后端要求的，如果同名，可以直接一个.例如下面：
+                // pname,
+                // cname
+            }
+        }).then(result=>{
+            console.log(result.data.list);
+            // document.querySelector('p').innerHTML = result.data.list.join('<br>');
+            let list=result.data.list
+            let  theLi= list.map(areaName=>`<li>${areaName}</li> `).join('');
+            document.querySelector('p').innerHTML = theLi;
+        })
+
+    </script>
+</body>
+</html>

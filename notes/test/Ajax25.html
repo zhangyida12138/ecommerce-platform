@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <ul class="my-ul"></ul>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        axios({url:'http://hmajax.itheima.net/api/category/top'}).then(result=>{
+            console.log(result);
+            const setPromiseList=result.data.data.map(item=>{
+                return axios({
+                    url:'http://hmajax.itheima.net/api/category/sub',
+                    params:{
+                        id:item.id
+                    }
+                })
+            })
+            console.log(setPromiseList);//二级分类请求的对象
+            const p=Promise.all(setPromiseList);
+            p.then(result=>{
+                console.log(result);
+                result.map(item=>{
+                    console.log(item.data.data);
+                })
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <form>
+        <span>省份：</span>
+        <select>
+            <option class="province">
+
+            </option>
+        </select>
+        <span>城市：</span>
+        <select>
+            <option class="city">
+
+            </option>
+        </select>
+        <span>地区：</span>
+        <select>
+            <option class="area">
+
+            </option>
+        </select>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        //事件循环，因为js是单线程执行
+        //为了不阻塞，设计了事件循环模型
+        //调用栈，宿主环境，任务队列
+        // 在调用栈空闲的时候会反复从任务队列中获取任务
+        //调用栈会将异步代码放进宿主环境中执行
+        //宿主环境执行完以后会放入任务队列
+        //任务队列分为微任务队列和宏任务队列，微任务队列优先
+        //微任务队列清空后才会执行下一个宏任务队列
+        //如果执行宏任务时产生了微任务，会在执行完这个宏任务后立刻执行微任务
+
+
+        //宏任务和微任务
+        //宏任务：由浏览器环境执行的异步代码
+        //<script>，setTimeout/setInterval,Ajax请求完成事件，用户交互事件
+
+            
+        //微任务：由js引擎环境执行的异步代码
+        //Promise对象.then（）
+
+        console.log(1);
+        setTimeout(()=>{
+            console.log(2);   
+        },0)//宏任务队列
+
+        const p=new Promise((resolve,reject)=>{
+            console.log(3);
+            resolve(4);
+        });//Promise本身是同步执行
+
+        p.then(result=>{//.then本身是同步执行，但是回调函数是异步执行
+            console.log(result);//微任务队列    
+        });
+        console.log(5);
+        //1 3 5 4 2 
+
+    </script>
+</body>
+
+</html>

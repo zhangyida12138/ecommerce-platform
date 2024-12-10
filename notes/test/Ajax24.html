@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <ul class="my-ul"></ul>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Promise.all（）静态方法， 合并多个Promise对象，返回一个新的Promise对象
+        //所有Promise对象都成功，就执行then
+        //有一个失败，就执行catch
+
+
+        //同时请求四个城市的天气
+        //1.请求城市天气，得到Promise对象
+        const bjPromise = axios({ url: 'http://hmajax.itheima.net/api/city', params: { pname: '北京' } });
+        const shPromise = axios({ url: 'http://hmajax.itheima.net/api/city', params: { pname: '上海' } });
+        const gzPromise = axios({ url: 'http://hmajax.itheima.net/api/city', params: { pname: '广东省' } });
+        const szPromise = axios({ url: 'http://hmajax.itheima.net/api/city', params: { pname: '辽宁省' } });
+        //只有params不一样，其他都一样
+
+        // 2.使用Promise.all()合并多个Promsie对象
+        const p = Promise.all([bjPromise, shPromise, gzPromise, szPromise]);
+        p.then(result => {
+            //数组结果顺序和请求顺序一致
+            console.log(result);
+            const htmlStr = result.map(item=>{
+                return `<li>${item.data.list[0]}</li>`
+            }).join('');
+            document.querySelector('.my-ul').innerHTML=htmlStr;
+        }).catch(error=>{
+            console.dir(error);
+        })
+    </script>
+</body>
+</html>

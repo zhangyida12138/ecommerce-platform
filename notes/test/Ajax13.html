@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <p class="my-p"></p>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        //XHR查询参数
+        //定义：浏览器提供给服务器的额外信息，让服务器返回浏览器想要的数据
+        //语法：http://xxx.com/xxx/xxx/？参数名=值&参数名2=值2
+        const XHR=new XMLHttpRequest();
+        XHR.open('GET','http://hmajax.itheima.net/api/city?pname=广东省')
+        XHR.addEventListener('loadend',()=>{
+            console.log(XHR.response);
+            const data=JSON.parse(XHR.response)
+            console.log(data);
+            document.querySelector('.my-p').innerHTML = data.list.join('<br>')
+        })
+        XHR.send();
+    </script>
+</body>
+</html>

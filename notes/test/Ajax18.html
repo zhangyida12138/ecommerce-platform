@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <p class="my-p"></p>
+    <button class="reg-btn">注册用户</button>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // 函数返回值是一个函数的原理：
+        // function outerFunction(outerValue) {
+        //     return function innerFunction(innerValue) {
+        //         return outerValue + innerValue;
+        //     };
+        // }
+
+        // const add5 = outerFunction(5);  // 这里 outerFunction 返回了 innerFunction
+        // console.log(add5(10));  // 实际上是调用 innerFunction(10)，输出 15
+
+
+        //封装建议的axios函数，基于Promise+XHR
+        //1.定义myAxios函数，接受配置对象，返回Promise对象
+        function myAxios(config) {
+            return new Promise((resolve, reject) => {
+                //2.发起XHR请求，默认请求方法为GET
+                
+                const xhr = new XMLHttpRequest();
+
+                //判断有没有params选项，携带查询参数
+                if(config.params){
+                // 使用URLSearchParams转换，并携带到url上
+                const paramsObj=new URLSearchParams(config.params);
+                const queryString=paramsObj.toString()
+                //把查询参数字符串拼接在url？后面
+                config.url+=`?${queryString}`;
+                }
+
+                xhr.open(config.method || 'GET', config.url);
+                xhr.addEventListener('loadend', () => {
+                    //3.调用成功/失败的处理程序
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(new Error(xhr.response));
+                    }
+
+                })
+                //判断有没有data选项。携带请求体
+                if(config.data){
+                    //转换数据类型
+                    const jsonStr=JSON.stringify(config.data);
+                    xhr.setRequestHeader('Content-Type','application/json')
+                    xhr.send(jsonStr);
+                }else{
+                    xhr.send();
+                }
+                
+            })
+        }
+        //4.使用myAxios函数，获取省份列表展示
+        //.then和.catch对象是由Promise对象带的
+        // myAxios({
+        //     url: 'http://hmajax.itheima.net/api/province'
+
+        // }).then(result => {
+        //     console.log(result);
+        //     document.querySelector('.my-p').innerHTML = result.list.join('<br>');
+
+        // }).catch(error => {
+        //     console.log(error);
+        //     document.querySelector('.my-p').innerHTML = error.message;
+        // })
+
+
+        //获取地区列表
+        // myAxios({
+        //     url: 'http://hmajax.itheima.net/api/area',
+        //     params:{
+        //         pname:'辽宁省',
+        //         cname:'大连市'
+        //     }
+
+        // }).then(result => {
+        //     console.log(result);
+        //     document.querySelector('.my-p').innerHTML = result.list.join('<br>');
+
+        // }).catch(error => {
+        //     console.log(error);
+        //     document.querySelector('.my-p').innerHTML = error.message;
+        // })
+
+        //给按钮绑定事件，并且完成注册
+        document.querySelector('.reg-btn').addEventListener('click',()=>{
+            myAxios({
+                url:'http://hmajax.itheima.net/api/register',
+                method:'POST',
+                data:{
+                    username:'zhangyida3232',
+                    password:'12121212'
+                }
+            }).then(result=>{
+                console.log(result);
+                
+            }).catch(error=>{
+                console.dir(error.message);
+                
+            })
+        })
+
+    </script>
+</body>
+
+</html>
