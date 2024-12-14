@@ -1,0 +1,15 @@
+postcss
+ babel 
+ cssmodules
+ tailwindcss 类似bootstrap
+websorket
+
+
+构建工具： 
+ webpack rollup esbuild
+ 哪种工程更适合开发和维护：一切皆为模块
+ 哪种工程更适合运行时： 传统工程
+ 如何转换： 打包
+
+ 文件指纹：哈希值，文件内容决定文件指纹
+ 解决浏览器缓存问题

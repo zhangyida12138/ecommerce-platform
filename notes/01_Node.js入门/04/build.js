@@ -8,7 +8,7 @@
 // 1.1 读取源 html 文件内容
 const fs = require('fs')
 const path = require('path')
-fs.readFile(path.join(__dirname, 'public/index.html'), (err, data) => {
+fs.readFile(path.resolve('./04/public/index.html'), (err, data) => {//建议还是使用join更加简单，不容易出错
   if (err) console.log(err)
   else {
     const htmlStr = data.toString()
@@ -22,3 +22,7 @@ fs.readFile(path.join(__dirname, 'public/index.html'), (err, data) => {
     })
   }
 })
+
+//resolve中的文件名得是运行时命令行的路径+到文件的相对路径
+
+//__dirname直接是以当前文件的路径为初始位置

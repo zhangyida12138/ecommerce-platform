@@ -15,3 +15,38 @@ fs.readFile(path.join(__dirname, '../test.txt'), (err, data) => {
   if (err) console.log(err)
   else console.log(data.toString())
 })
+
+// resolve中的文件名得是运行时命令行的路径+到文件的相对路径
+
+// __dirname直接是以当前文件的路径为初始位置
+
+const filepath=path.resolve('./test.txt');//不建议
+// 等价于path.join(__dirname, '../test.txt')
+
+console.log(filepath);
+
+console.log(path.basename(filepath));
+console.log(path.dirname(filepath));
+console.log(path.extname(filepath));
+console.log(path.isAbsolute(filepath));
+
+const from = '/index.js';
+const to = '/test.txt';
+
+// 获取相对路径
+console.log(path.relative(from, to)); // 输出：../example.txt
+
+const parsed = path.parse(filepath);
+console.log(parsed);
+/*
+{
+  root: '/',
+  dir: '/user/local',
+  base: 'example.txt',
+  ext: '.txt',
+  name: 'example'
+}
+*/
+
+// 格式化路径
+console.log(path.format(parsed));
