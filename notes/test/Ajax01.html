@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>测试页面</title>
     <style>
-        
+
     </style>
 </head>
+
 <body>
     <p class="my-p"></p>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-//         AJAX 是一种技术或概念，用于在不重新加载整个网页的情况下通过 HTTP 请求从服务器异步获取数据。
+        //         AJAX 是一种技术或概念，用于在不重新加载整个网页的情况下通过 HTTP 请求从服务器异步获取数据。
 
-// AJAX 是一个宽泛的概念，表示通过 JavaScript 使用浏览器内置的 XMLHttpRequest 对象
-// 或 fetch API 来发送请求和接收响应。
+        // AJAX 是一个宽泛的概念，表示通过 JavaScript 使用浏览器内置的 XMLHttpRequest 对象
+        // 或 fetch API 来发送请求和接收响应。
 
-// Axios 是一个基于 AJAX 技术的第三方库，它封装了 AJAX 的具体实现，
-// 提供了一个更简洁的 API，来进行 HTTP 请求（包括 GET、POST、PUT、DELETE 等）。
-// 简而言之：
+        // Axios 是一个基于 AJAX 技术的第三方库，它封装了 AJAX 的具体实现，
+        // 提供了一个更简洁的 API，来进行 HTTP 请求（包括 GET、POST、PUT、DELETE 等）。
+        // 简而言之：
 
-// AJAX 是一种概念或技术，可以用原生的 XMLHttpRequest 或 fetch 实现。
-// Axios 是一个 JavaScript 库，它基于 AJAX 封装，提供了更简单的接口和额外的功能来进行 HTTP 请求。
-//         // 使用axios库
+        // AJAX 是一种概念或技术，可以用原生的 XMLHttpRequest 或 fetch 实现。
+        // Axios 是一个 JavaScript 库，它基于 AJAX 封装，提供了更简单的接口和额外的功能来进行 HTTP 请求。
+        //         // 使用axios库
         axios({
-            url:'http://hmajax.itheima.net/api/province'
-        }).then(result=>{
+            url: 'http://hmajax.itheima.net/api/province'
+        }).then(result => {
             console.log(result);
             //多打印确定属性名字
             console.log(result.data.list);
@@ -37,4 +39,5 @@
         })
     </script>
 </body>
+
 </html>

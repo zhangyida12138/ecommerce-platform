@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <p class="my-p"></p>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        axios({
+            //参数列表
+            url: '/api/province',//如果没有baseURL的话，可以直接输入完整的url
+
+            method: 'post',//http方法
+
+            baseURL: 'http://hmajax.itheima.net',//能和url进行拼接
+
+            header: {
+                'Authorization': 'Bearer token',//Authorization 请求头可以携带多种认证信息，如 Bearer Token 或者 Basic Authentication，也可以是其他类型的认证信息。通常用于 OAuth 或 API token 认证。
+                'Content-Type': 'application/json'
+            },//自定义请求头
+
+            params: {
+                pname: '广东省'
+            },//查询参数，用于GET请求
+
+            data: {
+                name: 'john'
+            },//用于发送数据，post，put，patch等请求方法
+
+            timeout: 5000,//设置请求的超时时间，请求超时，没有收到服务器的响应，axios会自动停止请求。
+
+            auth: {
+                username: 'username',
+                password: 'password'
+            },//进行http基本认证时使用，这个是用来简化HTTP Basic Authentication的一种方式，会将用户名和密码 通常以Authorization: Basic <base64(username:password)>的形式添加到请求头中。仅适用于基本认证场景。 需要避免泄露时还是需要用https和加密。
+
+            responseType: 'json',//默认值，设置响应数据的类型，还可以是text，blob，arraybuffer等，不是用来要求服务器如何返回特定数据类型的，而是让axios以这种类型来处理返回的数据格式。
+
+            maxRedirects: 5,//允许的最大重定向次数，超过就会抛出错误
+
+            withCredentials: true,//如果为true，则在跨域请求时候会发送凭证如cookies，默认下不发送。同源情况下会默认发送。这是为了安全问题。
+
+            validateStatus: function (status) {
+                return status >= 200 && status < 300;//默认行为
+            },//允许定义一个函数判断http响应码是否被认为是成功的，返回true是成功，false是失败的，axios会抛出一个错误。
+
+            onUploadProgress: function (progressEvent) {
+                let percent = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+                console.log(`Upload Progress: ${percent}%`);
+            },//类似的和还有onDownloadProgress，用于上传或下载进度的回调，用于需要显示进度条的场景。这个是原生事件，不是服务器发送的。progressEvent提供了上传的当前进度，已上传数据量等信息。根据字节数来计算的。
+
+            cancelToken: source.token//用于取消请求，防止某些不再需要的请求继续执行，可以在请求进行中或之后取消请求。
+            // CancelToken 参数：它是通过 axios.CancelToken.source() 创建的一个对象，包含了 token 和 cancel 方法。
+            // 取消请求的时机：cancelToken 必须在请求发起之前传递给 axios，一旦请求发出后，就不能修改 cancelToken。一旦触发 cancel 方法，当前请求会被取消。
+        }).then(result => {
+
+        })
+        // 取消请求
+        source.cancel('Request canceled');
+    </script>
+</body>
+
+</html>

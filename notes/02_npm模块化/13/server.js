@@ -13,7 +13,7 @@ const server = express()
 // 2. 导入 cors 函数
 const cors = require('cors')
 // 3. 使用 server.use() 给 Web 服务添加插件功能
-server.use(cors())
+server.use(cors())//允许所有外部域名访问资源
 
 server.get('/api/province', (req, res) => {
   fs.readFile(path.join(__dirname, 'data/province.json'), (err, data) => {

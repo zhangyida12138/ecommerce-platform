@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>测试页面</title>
     <style>
-        
+
     </style>
 </head>
+
 <body>
     <p class="my-p"></p>
     <button class="btn">注册</button>
@@ -24,26 +26,27 @@
 空行
 响应体 返回的资源-->
     <script>
-        
-        document.querySelector('.btn').addEventListener('click',()=>{
-            
+
+        document.querySelector('.btn').addEventListener('click', () => {
+
             axios({
-            url:'https://hmajax.itheima.net/api/register',
-            method:'post',//不区分大小写，默认是get，可以省略
-            data:{
-                username:'zhangyida',
-                password:'123456'
-            }
-            //get需要用到params，post用到data
-        }).then(result=>{
-            console.log(result);
-            console.log(result.data); 
-        }).catch(error=>{
-            console.log(error.response.data.message);
-            alert(error.response.data.message)
-        });
+                url: 'https://hmajax.itheima.net/api/register',
+                method: 'post',//不区分大小写，默认是get，可以省略
+                data: {
+                    username: 'zhangyida',
+                    password: '123456'
+                }
+                //get需要用到params，post用到data
+            }).then(result => {
+                console.log(result);
+                console.log(result.data);
+            }).catch(error => {
+                console.log(error.response.data.message);
+                alert(error.response.data.message)
+            });
         })
-        
+
     </script>
 </body>
+
 </html>
