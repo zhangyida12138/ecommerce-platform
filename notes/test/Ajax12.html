@@ -35,7 +35,7 @@
             const data = JSON.parse(xhr.response);
             console.log(data.list.join('<br>'));
             document.querySelector('.my-p').innerHTML = data.list.join('<br>');
-
+            
         })
         //4.调用send（）方法发起请求
         xhr.send();//如果有请求体的话,在里面作为参数传递.

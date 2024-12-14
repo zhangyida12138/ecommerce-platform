@@ -16,6 +16,9 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const xhr = new XMLHttpRequest();
+        // xhr的查询参数必须要添加到url中
+        // 可以使用URLSearchParams将对象转换为查询字符串,拼接到url中.
+
         xhr.open(method, url, async, user, password);//method:请求方法,url:目标的URL,async:true表示同步,false表示异步.user和password可选,表示http的基本认证.
         xhr.setRequestHeader();
         xhr.addEventListener();
@@ -33,7 +36,7 @@
         // onprogress请求过程中触发,用于显示进度,
         // onreadystatechange:每次readyState改变时触发,
         // ontimeout请求超时时触发.
-        
+
         xhr.send(data);//如果有请求体的话(post),在里面作为参数传递.get请求不需要参数.
 
         //处理响应,可以通过xhr.responseText获取响应文本内容,或者使用xhr.response获取其他响应内容如json.

@@ -16,6 +16,8 @@
     <p class="my-p"></p>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        //axios是异步的,fetch和xhr都是异步的,但是xhr可以设置成同步的.
+        //axios和fetch都是基于promise的,不支持同步操作.
         axios({
             //参数列表
             url: '/api/province',//如果没有baseURL的话，可以直接输入完整的url
@@ -31,7 +33,7 @@
 
             params: {
                 pname: '广东省'
-            },//查询参数，用于GET请求
+            },//查询参数，用于GET请求,会自动将对象序列化为查询字符串,不需要手动添加到URL中.支持多种数据格式,复杂参数也能很好处理.
 
             data: {
                 name: 'john'

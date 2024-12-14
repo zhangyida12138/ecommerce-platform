@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const p = new Promise((resolve,reject)=>{
+            //xhr请求默认是异步的,可以在xhr.open(method, url, async, user, password);中的async中设置,true是异步,false是同步.
             const xhr =new XMLHttpRequest();
             xhr.open('GET','http://hmajax.itheima.net/api/province');
             xhr.addEventListener('loadend',()=>{

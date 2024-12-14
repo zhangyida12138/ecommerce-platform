@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <form>
+        <span>省份：</span>
+        <select>
+            <option class="province">
+
+            </option>
+        </select>
+        <span>城市：</span>
+        <select>
+            <option class="city">
+
+            </option>
+        </select>
+        <span>地区：</span>
+        <select>
+            <option class="area">
+
+            </option>
+        </select>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        //async函数和await，可以解决回调地狱问题
+        //async/await 是基于 Promise 的语法糖，可以用同步的写法处理异步操作，彻底消除嵌套问题
+        //1.定义async修饰的函数
+        async function getDefaultArea() {
+            //2.用await等待Promise对象成功的结果
+            //如果出错，使用try...catch语句捕获
+            try {
+                const pObj = await axios({ url: 'http://hmajax.itheima.net/api/province1' });//每次使用await时后续代码会暂停,等待当前promise完成.
+                console.log(pObj);
+                const pname = pObj.data.list[0];
+
+                const cObj = await axios({ url: 'http://hmajax.itheima.net/api/city', params: { pname } });
+                console.log(cObj);
+                const cname = cObj.data.list[0];
+
+                const areaObj = await axios({ url: 'http://hmajax.itheima.net/api/area', params: { pname, cname } });
+                console.log(areaObj);
+                const areaname = areaObj.data.list[0];
+
+                document.querySelector('.province').innerHTML = pname;
+                document.querySelector('.city').innerHTML = cname;
+                document.querySelector('.area').innerHTML = areaname;
+            } catch (error) {
+                //使用catch块，接受错误信息
+                //如果try中有错误，那么下面的代码都不执行了
+                console.dir(error);
+            }
+
+            // 当一个函数被声明为 async 时，无论函数内部是否显式地返回 Promise，它都会自动将返回值封装为一个 Promise 对象。如果没有显式返回 Promise，JavaScript 会隐式地用 Promise.resolve() 将返回值封装成一个 Promise。
+            // 如果一个 async 函数没有 return 语句，它会返回一个状态为 fulfilled 的 Promise，且值为 undefined。
+        }
+        //如果希望同时执行多个异步操作,并发执行,可以这样 
+        async function concurrentFetch() {
+            let promise1 = new Promise(resolve => setTimeout(() => resolve('结果1'), 2000));
+            let promise2 = new Promise(resolve => setTimeout(() => resolve('结果2'), 2000));
+
+            let [result1, result2] = await Promise.all([promise1, promise2]);//一个失败就全部失败
+            console.log(result1); // 输出: 结果1
+            console.log(result2); // 输出: 结果2
+        }
+        getDefaultArea()
+    </script>
+</body>
+
+</html>

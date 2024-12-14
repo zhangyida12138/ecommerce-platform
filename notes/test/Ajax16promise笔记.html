@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>测试页面</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        //Promise的三种状态 pendding-待定，fulfilled已兑现，会调用resolve()，rejected已拒绝，调用reject()
+        //状态一旦敲定，就无法改变
+        // Promise对象用于表示一个异步操作的最终完成或失败，及其结果值
+        // 1。创建promise对象
+        const p = new Promise((resolve, reject) => {
+            // 2.执行异步任务，并传递结果
+            // 成功调用：resolve值触发，then（）执行
+            //失败调用：reject值触发，catch（）执行
+            console.log('Promise对象一创建就立刻执行');
+
+            setTimeout(() => {
+                //resolve（）=>'fulfilled状态-已兑现'=>then()
+                resolve('模拟ajax请求-成功结果');
+                //reject（）=>'rejected状态-已失败'=>catch()
+                //两个都出现的话，只会是resolve，一旦敲定就不会改变了
+                reject(new Error('模拟ajax请求-失败结果'))
+                //最好是reject一个error,这样的话在调试中可以进行堆栈追踪,进行调试.还可以提供丰富的错误信息.
+
+            }, 2000)
+        })
+        console.log(p);//可以看到状态是pending
+        p.then(result => {
+            console.log(result);
+
+        }, error => {
+            //.then中第二个参数可以捕获错误,这里捕获了,catch就不会再捕获了.
+            // 但是如果是再.then中第一个回调函数中的错误,这里是无法捕获的.
+            // 可以在 .then 的第二个回调函数中捕获内层 Promise 的错误，从而阻止错误继续向外传播。这种做法有效地“终止”了链式调用中的错误传播，避免它影响外层的链式调用。
+        })
+
+        p.catch(error => {//这是用来捕获promise链中的错误,不一定是当前promise中的错误.
+            //promise链中的错误会逐步向下传播,直到被第一个catch捕获.如果没有catch,就会变成未处理的promise rejection,导致程序崩溃.
+            console.log(error);
+        })
+
+        // 返回值包装机制
+        // 在 Promise 链中，每次调用.then() 或.catch()，无论回调函数中返回的是一个普通值还是 Promise，都会根据以下规则处理：
+
+        // 如果返回的是普通值：
+        // 它会被包装成一个 Promise，即相当于 Promise.resolve(普通值)。
+        // 这个 Promise 状态为 fulfilled，并将返回的值作为结果传递给后续.then()。
+
+        // 如果返回的是一个 Promise：
+        // 链式调用会等待这个返回的 Promise 的状态完成（fulfilled 或 rejected），并将其结果（或错误）传递给后续的.then() 或.catch()。
+
+        // 如果回调中抛出错误：
+        // 返回的 Promise 会进入 rejected 状态，并将抛出的错误传递给后续的.catch()。
+
+        Promise.resolve()
+            .then(() => {
+                return '普通值';
+            })//自动包装成一个fulfilled状态的promise
+            .then(result => {
+                console.log(result); // 输出: 普通值
+            });
+
+        // 如果链式调用中有一个 Promise 失败了，并且 .then 中没有 error 回调函数：
+        // 在这种情况下：
+        // 如果 .then 中没有提供 error 回调函数，那么错误会沿着链式调用向下传播，直到被最近的 .catch 捕获。
+        // 下一个 .then 不会执行成功回调，而是跳过，直接进入最近的.catch
+
+        Promise.resolve('初始成功')
+            .then(result => {
+                console.log(result); // 输出: 初始成功
+                return Promise.reject('中途失败'); // 返回一个失败的 Promise
+            })
+            .then(result => {
+                console.log('不会执行:', result); // 不会执行，因为上一个 Promise 失败了
+            })
+            .catch(error => {
+                console.error('捕获到错误:', error); // 输出: 捕获到错误: 中途失败
+            });
+
+        // 如果最后面的 .catch 后还有一个 .then会不会执行：
+        // catch 后的 .then 会执行：
+
+        // catch 捕获错误后，链式调用恢复为正常状态，后续的 .then 会继续执行。
+        // catch 的返回值（普通值或新的 Promise）会作为下一个 .then 的输入。
+        // 如果 .then 中提供了 error 回调（即 then(null, errorCallback) 的形式），该回调不会执行：
+
+        // 因为错误已经被 .catch 处理，后续的 .then 是基于 .catch 返回值继续处理。
+
+        Promise.resolve('初始成功')
+            .then(result => {
+                console.log(result); // 输出: 初始成功
+                return Promise.reject('中途失败'); // 返回一个失败的 Promise
+            })
+            .catch(error => {
+                console.error('捕获到错误:', error); // 输出: 捕获到错误: 中途失败
+                return '错误已处理'; // 返回一个新值
+            })
+            .then(result => {
+                console.log('继续处理:', result); // 输出: 继续处理: 错误已处理
+            });
+
+        // 如果 .then 中有 error 回调，是否会执行？
+        // 不会执行，因为 .catch 已经处理了错误，后续 .then 不会再进入错误分支。
+
+        Promise.resolve('初始成功')
+            .then(result => {
+                console.log(result); // 输出: 初始成功
+                return Promise.reject('中途失败'); // 返回一个失败的 Promise
+            })
+            .catch(error => {
+                console.error('捕获到错误:', error); // 输出: 捕获到错误: 中途失败
+                return '错误已处理'; // 返回一个新值
+            })
+            .then(
+                result => {
+                    console.log('继续处理:', result); // 输出: 继续处理: 错误已处理
+                },
+                error => {
+                    console.error('不会执行此错误处理:', error); // 不会执行
+                }
+            );
+        //promise并行操作:
+        const promise1 = Promise.resolve(1);
+        const promise2 = new Promise(resolve => setTimeout(() => resolve(2), 1000));
+        const promise3 = new Promise(resolve => setTimeout(() => resolve(3), 2000));
+
+        //全部成功或者全部失败
+        Promise.all([promise1, promise2, promise3])
+            .then(results => {
+                console.log('所有 Promise 完成:', results); // 输出: [1, 2, 3]
+            })
+            .catch(error => {
+                console.error('某个 Promise 失败:', error);
+            });// 输出: 某个 Promise 失败: 出错了
+
+        //成功是独立的,但是可以获取一个对象,表示成功与否
+        Promise.allSettled([promise1, promise2, promise3])
+            .then(results => {
+                console.log('所有 Promise 状态:', results);
+                // 输出:
+                // [
+                //   { status: 'fulfilled', value: 1 },
+                //   { status: 'rejected', reason: '出错了' },
+                //   { status: 'fulfilled', value: 3 }
+                // ]
+            });
+
+        //返回最先完成的Promise的结果,无论fulfilled还是rejected
+        Promise.race([promise1, promise2, promise3])
+            .then(result => {
+                console.log('第一个完成的结果:', result); // 输出: Promise 2 出错
+            })
+            .catch(error => {
+                console.error('第一个失败的结果:', error); // 如果是失败的 Promise
+            });
+
+        //只要有一个成功的 ,就返回第一个成功的结果.
+        // 如果全部都失败,就返回一个失败的promise,错误信息是包含所有失败原因的数组.
+        Promise.any([promise1, promise2, promise3])
+            .then(result => {
+                console.log('第一个成功的结果:', result); // 输出: 第一个成功的结果: 成功的 Promise
+            })
+            .catch(error => {
+                console.error('所有 Promise 都失败:', error.errors);
+                // 输出: 所有 Promise 都失败: ['错误 1', '错误 3']
+            });
+    </script>
+</body>
+
+</html>
