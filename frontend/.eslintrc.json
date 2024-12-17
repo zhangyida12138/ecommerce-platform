@@ -1,0 +1,23 @@
+{
+    "parser": "@babel/eslint-parser",  // 使用 Babel 解析器
+    "extends": ["eslint:recommended", "plugin:react/recommended"],  // 扩展推荐规则
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true   // 启用 ES6 环境
+    },
+    "plugins": ["react"],  // 添加 React 插件
+    "rules": {
+      "no-console": "warn",  // 自定义规则：console 警告
+      "react/prop-types": "off"  // 关闭 PropTypes 检查（可选）
+    },
+    "parserOptions": {
+      "requireConfigFile": false,  // 不强制 Babel 配置文件
+      "ecmaVersion": 2021,         // 使用最新 ECMAScript 语法
+      "sourceType": "module",      // 支持 ES 模块
+      "ecmaFeatures": {
+        "jsx": true                // 启用 JSX 语法
+      }
+    }
+  }
+  

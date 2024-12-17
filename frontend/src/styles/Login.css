@@ -1,0 +1,135 @@
+* {
+  box-sizing: border-box;
+}
+
+/* 容器整体布局 */
+.container {
+    /* 使用flex布局 */
+    display: flex;
+    /* 水平和竖直居中 */
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgb(236, 236, 236); */
+    border-radius: 1rem;
+    width: 900px;
+    margin: 2rem auto;
+    padding: 2rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 左侧二维码区域 */
+.QRcode {
+    text-align: center;
+    padding: 1rem;
+    /* border-radius: 1rem; */
+    padding-right: 4rem;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    border-right: 2px solid rgb(224, 224, 224);
+}
+
+.QRcode-Label, .tab{
+    font: 1.5em sans-serif;
+}
+
+.QRcode-img {
+    width: 150px;
+    height: 150px;
+    margin: 1rem 0;
+}
+
+/* 登录按钮不可见，只有二维码过期了才可见 */
+.refresh-btn {
+    display: none;
+    border: none;
+    background-color: #f5f5f5;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.QRcode-lession {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: grey;
+}
+
+.app-highlight {
+    color: orangered;
+}
+
+.QRcode-link {
+    color: orangered;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+/* 右侧登录区域 */
+.login {
+    padding: 4rem;
+    /* border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    margin-left: 1.5rem;
+}
+
+.login-tabs{
+    display: flex;
+    justify-content: center;
+    /* border-bottom: 2px solid rgb(224, 224, 224); */
+    margin-bottom: 1rem;
+}
+
+.tab{
+    padding:0.5rem 1rem;
+    margin: 0 2.5rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tab.active{
+    color:orangered;
+    border-bottom:2px solid orangered;
+}
+
+.input-field{
+    display: block;
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.8rem;
+    margin: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ddd;
+    background-color: #e8ebee;
+
+}
+
+.forget-password{
+    text-align: center;
+    color:grey;
+    font-size:0.9rem;
+    cursor: pointer;
+    transform: translateX(11rem) translateY(-3.7rem);
+}
+
+.btn{
+    display: block;
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.8rem;
+    margin: 1.5rem;
+    border-radius: 0.5rem;
+    color:white;
+    border:none;
+    background-color: orangered;
+}
+
+.btn:hover {
+  background-color: rgb(255, 100, 50);
+}
+
+.bg{
+    margin-top: 2rem;
+}
+
+.empty-space{
+    margin-top: 6rem;
+}

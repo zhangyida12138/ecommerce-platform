@@ -1,7 +1,7 @@
 postcss
  babel 
  cssmodules
- tailwindcss 类似bootstrap
+ tailwindcss 工具类优先的框架，通过一组小的原子化的css类来控制布局和样式，类似bootstrap
 websorket
 
 

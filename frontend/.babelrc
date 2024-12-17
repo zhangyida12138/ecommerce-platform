@@ -1,0 +1,6 @@
+{
+    "presets":[
+        "@babel/preset-env",//支持es6语法
+        "@babel/preset-react"//支持JSX语法
+    ]
+}

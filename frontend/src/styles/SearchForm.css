@@ -1,0 +1,90 @@
+.search-form-container{
+    position: fixed;
+    left: 50%;
+}
+
+/* 整体搜索框 */
+.search-form{
+    border-radius: 0.5rem;
+    border:1px solid orangered;
+    font-size: 1.2rem;
+    width: 30rem;
+    display:flex;
+    align-items: center;
+    padding:0.2rem;
+    transform: translateX(-50%);
+}
+
+.search-filter-container{
+    position: relative;
+    display: flex;
+}
+
+.search-filter{
+    margin-left:1rem;
+    padding-right:1rem;
+    border-right: 1px solid orangered;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #333;
+}
+
+.dropdown-menu{
+    position: absolute;
+    /* 紧贴筛选文字下面 */
+    top:100%;
+    left:0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    /* 为了确保这个下拉框在其他元素上面 */
+    z-index: 10;
+    min-width: 4rem;
+    transform: translateY(-2rem);
+}
+
+.dropdown-item{
+    padding: 0.5rem 1rem;
+    cursor:pointer;
+    color: #333;
+    white-space: nowrap;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5;
+    color: orangered;
+  }
+
+.search-input{
+    margin-left: 1rem;
+    height:2.5rem;
+    border: 0;
+    width: 20rem;
+    /* 去掉默认的蓝色边框 */
+    outline:none;
+    font-size: 1rem;
+}
+
+/* .search-input:focus{
+    border:1px solid orangered;
+    border-radius: 0.5rem;
+} */
+
+.search-button{
+    height:2.5rem;
+    width: 5rem;
+    color: white;
+    background-color: orangered;
+    border-radius: 0.5rem;
+    border: 0;
+    margin-left: 0.5rem;
+    cursor:pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+.search-button:hover{
+    background-color: rgba(255, 30, 0, 0.788);
+}
