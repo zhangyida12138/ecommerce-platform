@@ -5,7 +5,7 @@ import {createBrowserRouter,RouterProvider}from "react-router-dom";//允许路�
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Error from "../pages/Error";
-import RotatePicture from "../components/Carousel"
+import RotatePicture from "../components/RecommendationCard"
 
 import { Suspense,lazy } from "react";//预留的懒加载
 
